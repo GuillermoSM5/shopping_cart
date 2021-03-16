@@ -4,8 +4,18 @@ import {NavLink, Switch,Route} from 'react-router-dom';
 import Inicio from './Components/Inicio';
 import Tienda from './Components/Tienda';
 import Blog from './Components/Blog';
+import Error404 from './Components/Error404'
+
 
 function App() {
+
+const productos =[
+  {id: 1, nombre:'producto 1'},
+  {id: 2, nombre:'producto 2'},
+  {id: 3, nombre:'producto 3'},
+  {id: 4, nombre:'producto 4'}
+]
+;
   return (
     <Contenedor>
        <Menu>
@@ -17,9 +27,13 @@ function App() {
          <Switch>
            <Route exact path='/' component={Inicio}/>
            <Route path='/blog' component={Blog}/>
-           <Route path='/tienda' component={Tienda}/>
+           <Route path='/tienda'><Tienda productos={productos}/></Route>
+           <Route component={Error404}/>
          </Switch>
        </main>
+       <aside>
+         <h3>SideBar</h3>
+       </aside>
     </Contenedor>
   );
 }

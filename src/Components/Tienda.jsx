@@ -1,7 +1,14 @@
 import React from 'react';
+import Productos from './Productos'
 
-const Tienda = () => {
-    return (<h1>Tienda</h1>  );
+const Tienda = ({productos}) => {
+    
+    return (
+       <div> 
+         <h3>Tienda</h3>
+         <Productos productos={productos}/>
+       </div>  
+    );
 }
  
 export default Tienda;
