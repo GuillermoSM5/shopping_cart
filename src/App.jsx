@@ -15,6 +15,33 @@ function App() {
 		{ id: 4, nombre: 'producto 4' },
 	];
 	const [carrito, setCarrito] = useState([]);
+
+	const agregarAlCarrito = (idProducto, nombre) => {
+		const nuevoCarrito = [...carrito];
+		if (nuevoCarrito.length === 0) {
+			nuevoCarrito.push({ id: idProducto, nombre: nombre, cantidad: 1 });
+		} else {
+			const existe =
+				nuevoCarrito.filter((productodelcarrito) => {
+					return productodelcarrito.id === idProducto;
+				}).length > 0;
+			if (existe) {
+				nuevoCarrito.forEach((producto, index) => {
+					if (producto.id === idProducto) {
+						const cantidad = producto.cantidad;
+						nuevoCarrito[index] = {
+							id: idProducto,
+							nombre: nombre,
+							cantidad: cantidad + 1,
+						};
+					}
+				});
+			} else {
+				nuevoCarrito.push({ id: idProducto, nombre: nombre, cantidad: 1 });
+			}
+		}
+		setCarrito(nuevoCarrito);
+	};
 	return (
 		<Contenedor>
 			<Menu>
@@ -27,7 +54,7 @@ function App() {
 					<Route exact path='/' component={Inicio} />
 					<Route path='/blog' component={Blog} />
 					<Route path='/tienda'>
-						<Tienda productos={productos} />
+						<Tienda productos={productos} agregarAlCarrito={agregarAlCarrito} />
 					</Route>
 					<Route component={Error404} />
 				</Switch>

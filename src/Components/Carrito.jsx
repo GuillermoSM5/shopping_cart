@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const Carrito = ({ carrito }) => {
 	return (
 		<>
-			<h3>Carrito</h3>
 			{carrito.length > 0 ? (
 				carrito.map((producto, index) => {
 					return (

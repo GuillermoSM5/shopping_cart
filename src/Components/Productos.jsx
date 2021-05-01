@@ -1,32 +1,34 @@
 import React from 'react';
 import Styled from 'styled-components';
 
-const Productos = ({productos}) => {
-    console.log(productos)
-    return (
-        <>
-          <h5>Productos</h5>    
-          <ContenedorProductos>
-            {
-              productos.map((item,index)=>{
-                 return  (<Producto key={index}> 
-                             <p>{item.nombre}</p>
-                             <Boton>Agregar al carrito</Boton>
-                          </Producto>)
-              })
-            }
-           </ContenedorProductos> 
-        </> 
-    );
-}
+const Productos = ({ productos, agregarAlCarrito }) => {
+	console.log(productos);
+	return (
+		<>
+			<h5>Productos</h5>
+			<ContenedorProductos>
+				{productos.map((item, index) => {
+					return (
+						<Producto key={index}>
+							<p>{item.nombre}</p>
+							<Boton onClick={() => agregarAlCarrito(item.id, item.nombre)}>
+								Agregar al carrito
+							</Boton>
+						</Producto>
+					);
+				})}
+			</ContenedorProductos>
+		</>
+	);
+};
 const ContenedorProductos = Styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     padding: 20px 0;
 `;
- 
-const Producto =  Styled.div`
+
+const Producto = Styled.div`
     padding: 20px;
     border: 1px solid #ebeef3;
     border-radius: 5px;
@@ -37,7 +39,7 @@ const Producto =  Styled.div`
         font-weight: bold;
     }
 `;
- 
+
 const Boton = Styled.button`
     border: none;
     background: #1c85e8;
@@ -56,5 +58,5 @@ const Boton = Styled.button`
         background: #1c6ab9;
     }
 `;
- 
+
 export default Productos;
